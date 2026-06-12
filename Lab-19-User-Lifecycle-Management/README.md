@@ -87,7 +87,7 @@ Disabling accounts:
 - Helps improve security
 
 ### Screenshot
-![Shot7](Screenshots/Lab19_Shot7_Sophia_Account_Disabled_Window.png)
+![Shot7](Screenshots/Lab19_Shot7_Sophia_Disabled_Account_Window.png)
 
 ### Screenshot
 ![Shot8](Screenshots/Lab19_Shot8_Sophia_Account_Disabled.png)
