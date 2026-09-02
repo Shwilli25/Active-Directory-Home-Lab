@@ -1,185 +1,102 @@
-# Lab 18.5 — Active Directory Finance Department Shared Folder Permissions Lab
+# Active Directory Department Shared Folder & Permissions
 
-## Lab Objective
-The purpose of this lab was to create a Finance department organizational structure in Active Directory, configure users and security groups, create a shared network folder, assign Share and NTFS permissions, and verify successful access from a client workstation.
+## Overview
 
--------------------------------------------------------------------
+This lab demonstrates how I configured group-based access to a departmental network share in a personal Active Directory home lab.
 
-# Lab Environment
+The scenario involved creating Finance department users, organizing them into a security group, assigning both Share and NTFS permissions to that group, and verifying access to the shared folder from a Windows client.
 
-| Component | Details |
-|---|---|
-| Domain Controller | DC01 |
-| Operating System | Windows Server 2022 |
-| Client Machine | Windows 10 |
-| Domain | lab.local |
-| Tools Used | Active Directory Users and Computers, File Explorer, Share Permissions, NTFS Permissions |
+> **Note:** This is a personal home lab created for hands-on learning and does not represent professional production experience.
 
--------------------------------------------------------------------
+## Environment
 
-# Lab Tasks Completed
+- Windows Server 2022
+- Active Directory Domain Services (AD DS)
+- Active Directory Users and Computers (ADUC)
+- Windows 10 client
+- Domain: `lab.local`
+- Security Group: `Finance_Employees`
+- Network Share: `Finance_Share`
 
-- Created Finance Organizational Unit (OU)
-- Created Finance department users
-- Created Finance_Employees security group
-- Added users to Finance security group
-- Created Finance shared folder
-- Configured Share permissions
-- Configured NTFS permissions
-- Verified successful access from a client workstation
+## Skills Practiced
 
--------------------------------------------------------------------
+- Active Directory user administration
+- Security group management
+- Group-based resource access
+- Windows file sharing
+- Share permissions
+- NTFS permissions
+- Network share access
+- Access verification
 
-# Step-by-Step Walkthrough
+## Scenario
 
-## Step 1 — Create Finance Organizational Unit (OU)
+A Finance department needed a shared network folder that department users could access.
 
-A new Organizational Unit named Finance was created inside Active Directory Users and Computers to organize Finance department accounts and resources.
+Rather than assigning permissions individually to each user, I placed the Finance users into the `Finance_Employees` security group and assigned permissions to the group. This provided a more manageable approach to controlling access to the departmental resource.
 
-### Screenshot
-![Shot1](Screenshots/Lab18.5_Shot1_Finance_New_Organizational_Unit_Window.png)
-### Screenshot
-![Shot2](Screenshots/Lab18.5_Shot2_Finance_OU_Created.png)
--------------------------------------------------------------------
+## 1. Configure Finance Users
 
-## Step 2 — Create Finance Department Users
+I created the Finance department user accounts within the Finance Organizational Unit in Active Directory.
 
-Several Finance department user accounts were created inside the Finance OU.
+![Finance users created](Screenshots/Lab18.5_Shot3_Finance_Users_Created.png)
 
-Users created:
-- Amanda Brooks
-- Brandon Hall
-- Olivia Martinez
-- Tyler Reed
+## 2. Assign Users to the Finance Security Group
 
-### Screenshot
-![Shot3](Screenshots/Lab18.5_Shot3_Finance_Users_Created.png)
+The Finance users were added to the `Finance_Employees` security group.
 
--------------------------------------------------------------------
+Using a security group allows resource permissions to be managed at the group level instead of assigning permissions separately to each user.
 
-## Step 3 — Create Finance Security Group
+![Finance security group members](Screenshots/Lab18.5_Shot6_Finance_Group_Members.png)
 
-A security group named Finance_Employees was created to simplify permission management for Finance users.
+## 3. Configure Share Permissions
 
-Group Configuration:
-- Group Scope: Global
-- Group Type: Security
+I assigned the `Finance_Employees` group access to the `Finance_Share`.
 
-### Screenshot
-![Shot4](Screenshots/Lab18.5_Shot4_New_Finance_Security_Group_Window.png)
+The group was granted:
 
-### Screenshot
-![Shot5](Screenshots/Lab18.5_Shot5_Finance_Group_Created.png)
--------------------------------------------------------------------
+- Change
+- Read
 
-## Step 4 — Add Users to Finance Security Group
+Full Control was not assigned.
 
-All Finance department users were added to the Finance_Employees security group.
+![Finance Share permissions](Screenshots/Lab18.5_Shot8_Finance_Share_Permissions.png)
 
-This allows permissions to be managed through the group instead of configuring each user individually.
+## 4. Configure NTFS Permissions
 
-### Screenshot
-![Shot6](Screenshots/Lab18.5_Shot6_Finance_Group_Members.png)
+I also configured NTFS permissions on the underlying `Finance_Share` folder.
 
--------------------------------------------------------------------
+The `Finance_Employees` group was granted permissions including:
 
-## Step 5 — Create Finance Shared Folder
+- Modify
+- Read & execute
+- List folder contents
+- Read
 
-A shared folder named Finance_Share was created on the domain controller desktop.
+![Finance NTFS permissions](Screenshots/Lab18.5_Shot9_Finance_NTFS_Permissions.png)
 
-This folder will be used as a centralized network share for Finance department resources.
+## 5. Verify Client Access
 
-### Screenshot
-![Shot7](Screenshots/Lab18.5_Shot7_Finance_Share_Created.png)
+After configuring the group membership, Share permissions, and NTFS permissions, I tested access from the Windows client.
 
--------------------------------------------------------------------
+The client successfully opened the shared resource through:
 
-## Step 6 — Configure Share Permissions
+`\\DC01\Finance_Share`
 
-Share permissions were configured for the Finance_Share folder.
+![Successful Finance Share access](Screenshots/Lab18.5_Shot10_Finance_Share_Access_Successful.png)
 
-Permissions assigned:
-- Finance_Employees → Change
-- Finance_Employees → Read
+## Result
 
-These permissions allow Finance employees to access and modify files inside the network share.
+The Finance departmental share was successfully configured and accessible from the client.
 
-### Screenshot
-![Shot8](Screenshots/Lab18.5_Shot8_Finance_Share_Permissions.png)
--------------------------------------------------------------------
+This lab demonstrated the relationship between:
 
-## Step 7 — Configure NTFS Permissions
+**Active Directory Users → Security Groups → Share Permissions → NTFS Permissions → Resource Access**
 
-NTFS permissions were configured on the Finance_Share folder.
+## What I Learned
 
-Permissions assigned:
-- Finance_Employees → Modify
-- Finance_Employees → Read & Execute
-- Finance_Employees → List Folder Contents
-- Finance_Employees → Read
+This lab helped me understand why permissions are commonly assigned to security groups rather than directly to individual users.
 
-This ensured the Finance security group had proper filesystem-level access.
+I also gained hands-on practice distinguishing between Share permissions and NTFS permissions. Both permission layers can affect a user's effective access when accessing a folder across the network.
 
-### Screenshot
-![Shot9](Screenshots/Lab18.5_Shot9_Finance_NTFS_Permissions.png)
--------------------------------------------------------------------
-
-## Step 8 — Verify Client Access
-
-The Finance shared folder was successfully accessed from the Windows 10 client workstation using the network path:
-
-\\DC01\Finance_Share
-
-Successful access confirmed that:
-- DNS resolution worked correctly
-- Share permissions were functioning
-- NTFS permissions were functioning
-- Finance group membership was applied correctly
-
-### Screenshot
-![Shot10](Screenshots/Lab18.5_Shot10_Finance_Share_Access_Successful.png)
-
--------------------------------------------------------------------
-
-# Key Concepts Learned
-
-## Organizational Units (OUs)
-Organizational Units are used in Active Directory to organize users, groups, and computers by department or role.
-
-## Security Groups
-Security groups simplify permission management by assigning permissions to groups instead of individual users.
-
-## Share Permissions
-Share permissions control network access to shared folders.
-
-## NTFS Permissions
-NTFS permissions control filesystem-level access on Windows drives and folders.
-
-## Least Privilege
-Permissions should only grant the minimum access necessary for users to perform their jobs.
-
--------------------------------------------------------------------
-
-# Real-World Relevance
-
-This lab simulated a real enterprise environment where IT administrators manage:
-- Department-based access control
-- Shared network folders
-- Security groups
-- Permission assignments
-- Active Directory user management
-
-These tasks are commonly performed in:
-- Help Desk roles
-- System Administration
-- IAM (Identity and Access Management)
-- Windows Server Administration
-- Enterprise IT environments
-
--------------------------------------------------------------------
-
-# Lab Summary
-
-In this lab, a complete Finance department structure was created inside Active Directory. Users and security groups were configured, a shared network folder was created, Share and NTFS permissions were assigned, and successful access was verified from a client machine.
-
-The lab demonstrated how Active Directory and Windows permissions work together to securely manage departmental resource access in an enterprise environment.
+Most importantly, I practiced verifying the final result from the client rather than assuming that the configuration was successful simply because the permissions had been assigned.
