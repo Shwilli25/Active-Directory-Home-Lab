@@ -1,150 +1,85 @@
-# Lab 19 – User Lifecycle Management in Active Directory
+# Active Directory User Lifecycle Management
 
-## Objective
-The purpose of this lab was to practice managing the full lifecycle of a user account in Active Directory. Tasks included creating a new employee account, assigning group memberships, transferring the employee to a different department, removing old permissions, disabling the account, and organizing disabled accounts into a dedicated Organizational Unit (OU).
+## Overview
 
----
+This lab demonstrates the management of a user account through multiple stages of the employee lifecycle in a Windows Server Active Directory environment.
 
-## Technologies Used
+Using a fictional employee, Sophia Turner, I practiced creating an account, assigning department group membership, updating access after a department transfer, disabling the account, and organizing the disabled account into a dedicated Organizational Unit (OU).
+
+> **Note:** This is a personal home lab created for hands-on learning and does not represent professional production experience.
+
+## Lab Environment
+
 - Windows Server 2022
+- Active Directory Domain Services (AD DS)
 - Active Directory Users and Computers (ADUC)
+- Domain: `lab.local`
 - Organizational Units (OUs)
-- Security Groups
+- Active Directory security groups
 
----
+## Skills Practiced
 
-# Step 1 – Create a New Finance User
+- Active Directory user account administration
+- Organizational Unit management
+- Security group membership management
+- Employee joiner, mover, and leaver concepts
+- Updating access after a department change
+- Removing outdated group membership
+- Disabling user accounts
+- Organizing disabled accounts
 
-A new user account for Sophia Turner was created inside the Finance OU. The account was configured with a username and prepared for Finance department access.
+## Scenario
 
-### Screenshot
-![Shot1](Screenshots/Lab19_Shot1_New_Finance_User_Window.png)
+Sophia Turner was created as a new Finance employee. During the lab, her account progressed through several lifecycle stages:
 
----
+1. Created as a Finance user
+2. Added to the `Finance_Employees` security group
+3. Transferred from Finance to HR
+4. Removed from the `Finance_Employees` group
+5. Added to the appropriate HR group
+6. Disabled as part of the simulated offboarding process
+7. Moved to a dedicated `Disabled_Users` OU
 
-# Step 2 – Verify User Creation
+The screenshots below highlight the most important stages of this process.
 
-The new Finance employee account was successfully created and appeared inside the Finance OU.
+## 1. Create the Finance Employee
 
-### Screenshot
-![Shot2](Screenshots/Lab19_Shot2_New_Finance_Employee_Created.png)
+Sophia Turner's user account was created within the Finance OU.
 
----
+![Sophia Turner created in Finance](Screenshots/Lab19_Shot2_New_Finance_Employee_Created.png)
 
-# Step 3 – Add User to Finance Security Group
+## 2. Assign Finance Group Membership
 
-Sophia Turner was added to the Finance_Employees security group. This granted her access to Finance department resources through group-based permissions.
+Sophia was added to the `Finance_Employees` security group as part of her Finance department configuration.
 
-Benefits of using security groups:
-- Simplifies permission management
-- Reduces administrative overhead
-- Allows consistent access control across departments
+![Sophia added to Finance Employees](Screenshots/Lab19_Shot3_Sophia_Added_To_Finance_Group.png)
 
-### Screenshot
-![Shot3](Screenshots/Lab19_Shot3_Sophia_Added_To_Finance_Group.png)
+## 3. Update Membership After Department Transfer
 
----
+After Sophia was transferred from Finance to HR, her previous Finance group membership was removed.
 
-# Step 4 – Move User to HR Department
+This demonstrates the importance of removing access that is no longer appropriate when an employee changes roles or departments.
 
-Sophia Turner was transferred from the Finance OU to the HR OU to simulate a departmental change within the organization.
+![Sophia removed from Finance Employees](Screenshots/Lab19_Shot5_Removed_Sophia's_Finance_Access.png)
 
-This demonstrates how administrators can reorganize user accounts as employees change roles.
+Sophia was then assigned to the HR group as part of the department change. This step is described here as part of the lifecycle workflow; the portfolio screenshots were intentionally limited to the strongest evidence rather than documenting every individual click.
 
-### Screenshot
-![Shot4](Screenshots/Lab19_Shot4_Sophia_Moved_To_HR.png)
+## 4. Disable the User Account
 
----
+As part of the simulated offboarding stage, Sophia's Active Directory account was disabled.
 
-# Step 5 – Remove Finance Department Access
+![Sophia account disabled](Screenshots/Lab19_Shot8_Sophia_Account_Disabled.png)
 
-Sophia Turner was removed from the Finance_Employees security group to revoke access to Finance department resources.
+## 5. Organize the Disabled Account
 
-This follows the Principle of Least Privilege by ensuring users only maintain access required for their current role.
+The disabled account was moved into a dedicated `Disabled_Users` OU to separate inactive accounts from active department users.
 
-### Screenshot
-![Shot5](Screenshots/Lab19_Shot5_Removed_Sophia's_Finance_Access.png)
+![Sophia moved to Disabled Users OU](Screenshots/Lab19_Shot12_Sophia_Moved_To_Disabled_Users.png)
 
----
+## What I Learned
 
-# Step 6 – Add User to HR Security Group
+This lab helped me understand that Active Directory account administration involves more than creating and deleting users. An employee's identity and access can change throughout their time with an organization.
 
-Sophia Turner was added to the HR_Employees security group to grant proper HR department permissions and access.
+When a user changes departments, old group memberships should be reviewed and removed when they are no longer appropriate, while new memberships can be assigned according to the user's new role. During offboarding, disabling the account prevents continued sign-in while keeping the account available for administrative handling.
 
-### Screenshot
-![Shot6](Screenshots/Lab19_Shot6_Sophia_Added_To_HR_Group.png)
-
----
-
-# Step 7 – Disable User Account
-
-Sophia Turner’s account was disabled to simulate an employee termination or inactive account scenario.
-
-Disabling accounts:
-- Prevents user logins
-- Preserves account information
-- Maintains audit history
-- Helps improve security
-
-### Screenshot
-![Shot7](Screenshots/Lab19_Shot7_Sophia_Disabled_Account_Window.png)
-
-### Screenshot
-![Shot8](Screenshots/Lab19_Shot8_Sophia_Account_Disabled.png)
-
----
-
-# Step 8 – Remove User from HR Group
-
-After disabling the account, Sophia Turner was removed from the HR_Employees security group to fully revoke department access.
-
-This prevents disabled accounts from retaining unnecessary permissions.
-
-### Screenshot
-![Shot9](Screenshots/Lab19_Shot9_Sophia_Removed_From_HR_Group.png)
-
----
-
-# Step 9 – Create Disabled Users OU
-
-A new Organizational Unit named Disabled_Users was created to store disabled employee accounts separately from active users.
-
-Benefits of a Disabled Users OU:
-- Improves organization
-- Simplifies administration
-- Helps with account auditing
-- Keeps inactive accounts separated from active employees
-
-### Screenshot
-![Shot10](Screenshots/Lab19_Shot10_New_OU_Window.png)
-
-### Screenshot
-![Shot11](Screenshots/Lab19_Shot11_Disabled_Users_OU_Created.png)
-
----
-
-# Step 10 – Move Disabled Account to Disabled Users OU
-
-The disabled Sophia Turner account was moved into the Disabled_Users OU.
-
-This demonstrates proper Active Directory account lifecycle management and organizational best practices.
-
-### Screenshot
-![Shot12](Screenshots/Lab19_Shot12_Sophia_Moved_To_Disabled_Users.png)
-
----
-
-# Conclusion
-
-In this lab, Active Directory user lifecycle management tasks were successfully completed. A new employee account was created, assigned permissions through security groups, transferred between departments, disabled, and archived into a dedicated Disabled Users OU.
-
-Key concepts practiced:
-- User account creation
-- Security group management
-- OU organization
-- Access revocation
-- Principle of Least Privilege
-- Disabled account management
-- Active Directory administrative best practices
-
-This lab strengthened hands-on experience with real-world Active Directory administration tasks commonly performed by Help Desk, System Administrators, and IAM professionals.
+The lab also reinforced the importance of keeping Active Directory organized so active and inactive accounts can be managed clearly.
