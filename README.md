@@ -49,6 +49,8 @@ During my Active Directory lab work, I also encountered connectivity and DNS-rel
 
 **Skills practiced:** Domain joins, DNS, Windows networking, client/server connectivity, troubleshooting
 
+➡️ [View Lab 17 – Windows Client Domain Join & Troubleshooting](Lab-17-Domain-Join/README.md)
+
 ---
 
 ### 2. Department Shared Folder & Permissions
@@ -58,6 +60,8 @@ Created a Finance department structure with users and a security group, configur
 Tested access from a domain client to verify that the configured group membership and permissions allowed the intended users to access the shared resource.
 
 **Skills practiced:** Security groups, shared folders, Share permissions, NTFS permissions, group-based access
+
+➡️ [View Lab 18.5 – Finance Shared Folder & Permissions](Lab-18.5-Finance-RBAC/README.md)
 
 ---
 
@@ -69,6 +73,8 @@ Linked the GPO to the appropriate OU, applied the policy, and verified that the 
 
 **Skills practiced:** Group Policy Management, Organizational Units, policy configuration, policy scope, verification
 
+➡️ [View Lab 13 – Group Policy Control Panel Restriction](Lab-13-Group-Policy/README.md)
+
 ---
 
 ### 4. User Lifecycle Management
@@ -78,6 +84,9 @@ Practiced managing an employee account through several stages of the identity li
 Created the user in the appropriate department, assigned group membership, updated the account when the employee changed departments, removed outdated group membership, assigned the appropriate new membership, and later disabled and moved the account as part of an offboarding scenario.
 
 **Skills practiced:** User administration, group membership, department transfers, access changes, account disabling, identity lifecycle concepts
+
+➡️ [View Lab 19 – User Lifecycle Management](Lab-19-User-Lifecycle-Management/README.md)
+
 
 ## Troubleshooting Highlight
 
